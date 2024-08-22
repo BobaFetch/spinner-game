@@ -17,6 +17,7 @@ let oldRotation = 0;
 let picked = 100000;
 let oldPick = [];
 let color = d3.scale.category20();
+let prizeIndex = 0;
 
 const testData = {
   employees: [
@@ -24,100 +25,192 @@ const testData = {
       label: "Chris Brown",
       value: 1,
     },
-    {
-      label: "Gorm Brunso",
-      value: 2,
-    },
+    // {
+      // label: "Gorm Brunso",
+      // value: 2,
+    // },
     {
       label: "Tien Dinh",
       value: 3,
     },
     {
-      label: "Lam Ngo",
+      label: "Dung Nguyen",
       value: 4,
     },
     {
-      label: "Dung Nguyen",
+      label: "Yen Nguyen",
       value: 5,
     },
+    // {
+      // label: "Bryce Polletti",
+      // value: 6,
+    // },
     {
-      label: "Yen Nguyen",
-      value: 6,
-    },
-    {
-      label: "Hiep Nguyen",
+      label: "Raymundo Rangel",
       value: 7,
     },
     {
-      label: "Bryce Polletti",
+      label: "Jason Stegriy",
       value: 8,
     },
     {
-      label: "Raymundo Rangel",
+      label: "Shannon Taylor",
       value: 9,
     },
     {
-      label: "Lee Robirds",
+      label: "Matt McGregor",
       value: 10,
     },
     {
-      label: "Jason Stegriy",
+      label: "Brandon Howard",
       value: 11,
     },
+    // {
+      // label: "Duyen Pham",
+      // value: 12,
+    // },
     {
-      label: "Shannon Taylor",
-      value: 12,
-    },
-    {
-      label: "Matt McGregor",
+      label: "Devon Krohn",
       value: 13,
     },
     {
-      label: "Brandon Howard",
+      label: "Randy Pugh",
       value: 14,
     },
     {
-      label: "Duyen Pham",
+      label: "Shawn Smith",
       value: 15,
     },
     {
-      label: "Devon Krohn",
+      label: "Arun Chand",
       value: 16,
     },
     {
-      label: "Randy Pugh",
+      label: "Jose Romero",
       value: 17,
     },
     {
-      label: "Shawn Smith",
+      label: "Mike McCloskey",
       value: 18,
     },
     {
-      label: "Arun Chand",
+      label: "Bob Konop",
       value: 19,
     },
     {
-      label: "Valerie Corona",
+      label: "Jared Garl",
       value: 20,
     },
     {
-      label: "Jose Romero",
+      label: "Joe Stout",
       value: 21,
     },
+    // {
+      // label: "Tiffany Schafer",
+      // value: 22,
+    // },
     {
-      label: "Mike McCloskey",
-      value: 22,
+      label: "Paula Hutchinson",
+      value: 23,
     },
     {
-      label: "Bob Konop",
-      value: 23,
+      label: "Dan Hiner",
+      value: 24,
+    },
+    {
+      label: "Curtis Smith",
+      value: 25,
+    },
+    {
+      label: "Dana Thornton",
+      value: 26,
+    },
+    {
+      label: "John Sepulveda",
+      value: 27,
+    },
+    {  
+      label: "William Woodward",
+      value: 28,
+    },
+    {
+      label: "Keith Stone",
+      value: 29,
+    },
+    // {
+      // label: "Donald Smith",
+      // value: 30,
+    // },
+    // {
+      // label: "Shane Wemhoff",
+      // value: 36,
+    // },
+    {
+      label: "Phillip Greene",
+      value: 31,
+    },
+    {
+      label: "Greg Martinez",
+      value: 32,
+    },
+    {
+      label: "Tamara Dawson",
+      value: 33,
+    },
+    {
+      label: "Joshua Dawson",
+      value: 34,
+    },
+    {
+      label: "Jason Meske",
+      value: 35,
+    },
+    {
+      label: "David Mazza",
+      value: 36,
+    },
+    {
+      label: "Rob Gregg",
+      value: 37,
+    },
+    {
+      label: "Sean Phillips",
+      value: 38,
+    },
+    {
+      label: "Constance Pauly",
+      value: 39,
     },
   ],
   prizes: [
     {
-      label: "Boombox",
+      label: "Seahawks Blanket",
       value: 1,
     },
+    {
+      label: "Zero Gravity Chair",
+      value: 2,
+    },
+    {
+      label: "Keyboard Mouse Set",
+      value: 3,
+    },
+    {
+      label: "Vacation Day(8 hrs)",
+      value: 4,
+    },
+    {
+      label: "Soap/Lotion Set",
+      value: 5,
+    },
+    {
+      label: "Camp Chair Cooler Combo",
+      value: 6,
+    },
+    {
+      label: "Weber Smokey Joe Grill",
+      value: 7,
+    }
   ],
 };
 
@@ -192,8 +285,8 @@ container.on("click", testSpin);
 function spin(d) {
   container.on("click", null);
   //all slices have been seen, all done
-  console.log("OldPick: " + oldpick.length, "Data length: " + data.length);
-  if (oldpick.length == data.length) {
+  console.log("OldPick: " + oldPick.length, "Data length: " + data.length);
+  if (oldPick.length == data.length) {
     console.log("done");
     container.on("click", null);
     return;
@@ -211,6 +304,7 @@ function spin(d) {
     return;
   } else {
     oldpick.push(picked);
+    prizeIndex++;
   }
   rotation += 90 - Math.round(ps / 2);
   vis
@@ -225,8 +319,9 @@ function spin(d) {
       );
       //populate question
       d3.select("#winner h1").text("Winner: " + data.employees[picked].label);
-      d3.select("#winner h3").text("Prize: " + data.prizes[0].label);
+      d3.select("#winner h3").text("Prize: " + data.prizes[prizeIndex].label);
       oldrotation = rotation;
+      // prizeIndex++;
 
       /* Get the result value from object "data" */
       console.log(data[picked].value);
@@ -295,6 +390,7 @@ socket.on("spin", (data) => {
   picked = data.picked;
   rotation = data.rotation;
   oldPick = data.oldPick;
+  prizeIndex = data.prizeIndex;
 
   spinWheel();
   container.on("click", testSpin);
@@ -335,10 +431,12 @@ function testSpin() {
   }
 
   rotation += 90 - Math.round(ps / 2);
+  prizeIndex++;
 
   socket.emit("spin", {
     picked: picked,
     rotation: rotation,
+    prizeIndex: prizeIndex
   });
 
   // socket.on("spin", (data) => {
@@ -357,6 +455,7 @@ function init() {
     oldPick = params.oldPick;
     picked = params.picked;
     rotation = params.rotation;
+    prizeIndex = params.prizeIndex;
   });
   console.log("initialized");
 }
@@ -377,12 +476,13 @@ function spinWheel() {
       d3.select("#winner h1").text(
         "Winner: " + testData.employees[picked].label
       );
-      d3.select("#winner h3").text("Prizel: " + testData.prizes[0].label);
+      d3.select("#winner h3").text("Prize: " + testData.prizes[prizeIndex - 1].label + "!");
 
       d3.select("#prev").append("div");
 
       socket.emit("rotate", {
         oldRotation: rotation,
+        prizeIndex: prizeIndex
       });
     });
 }

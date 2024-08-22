@@ -2,8 +2,23 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: "Gill San", sans-serif;
 }
 
 body {
   display: flex;
+}
+
+td {
+  border: 1px solid black;
+  margin: 0;
+  padding: 12px;
+}
+
+td.won {
+  background-color: #8fce00;
+}
+
+tr {
+  text-align:center;
 }
