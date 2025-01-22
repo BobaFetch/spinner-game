@@ -23,6 +23,11 @@ tr {
   text-align:center;
 }
 
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
 .shane {
   display: flex;
   flex-direction: column;

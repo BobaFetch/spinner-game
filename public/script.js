@@ -57,10 +57,10 @@ const testData = {
       label: "Brandon Howard",
       value: 11,
     },
-    {
-      label: "Duyen Pham",
-      value: 12,
-    },
+    // {
+      // label: "Duyen Pham",
+      // value: 12,
+    // },
     {
       label: "Randy Pugh",
       value: 14,
@@ -97,10 +97,10 @@ const testData = {
       label: "Dan Hiner",
       value: 24,
     },
-    {
-      label: "Dana Thornton",
-      value: 26,
-    },
+    // {
+      // label: "Dana Thornton",
+      // value: 26,
+    // },
     {
       label: "John Sepulveda",
       value: 27,
@@ -109,14 +109,10 @@ const testData = {
       label: "William Woodward",
       value: 28,
     },
-    {
-      label: "Donald Smith",
-      value: 30,
-    },
-    {
-      label: "Shane Wemhoff",
-      value: 36,
-    },
+    // {
+      // label: "Donald Smith",
+      // value: 30,
+    // },
     {
       label: "Phillip Greene",
       value: 31,
@@ -379,7 +375,7 @@ function testSpin() {
     return;
   }
 
-  const ps = 360 / 23; // testData.employees.length;
+  const ps = 360 / testData.employees.length;
   rng = Math.floor(Math.random() * 1440 + 360);
 
   rotation = Math.round(rng / ps) * ps;
@@ -391,10 +387,10 @@ function testSpin() {
   console.log("rotation: ", rotation);
 
   picked = Math.round(testData.employees.length - (rotation % 360) / ps);
-  picked = 23;
-  // picked >= testData.employees.length
-  //   ? picked % testData.employees.length
-  //   : picked;
+  picked = 
+  picked >= testData.employees.length
+    ? picked % testData.employees.length
+    : picked;
 
   if (oldPick.indexOf(picked) !== -1) {
     d3.select(this).call(testSpin);
@@ -444,26 +440,22 @@ function spinWheel() {
         "#111"
       );
 
-      d3.selectAll("svg").remove();
-      d3.select("#chart").style({
-        display: "flex",
-        width: "100vw",
-        height: "100vh",
-      });
-      d3.select("#chart").append("div").attr("class", "shane");
+      // d3.selectAll("svg").remove();
+      // d3.select("#chart").style({
+        // display: "flex",
+        // width: "100vw",
+        // height: "100vh",
+      // });
 
-      d3.select(".shane").append("h1").text("Winner: Shane Wemhoff!");
-      // d3.select(".shane").append("h2").text("Pig Socks");
-      d3.select(".shane")
-        .append("img")
-        .attr("src", "/images/socks.jpg")
-        .attr("class", "socks");
+      d3.select("#winner h1").text("Prize: $50");
 
-      // d3.select("#winner h1").text(
-      //   "Winner: " + testData.employees[picked].label
-      // );
+      d3.select("#winner h3").text("Winner: " + testData.employees[picked].label);
+
+      d3.select("#prev").append("p").text(testData.employees[picked].label);
+
+      // d3.select("#winner h1").text("Winner: " + testData.employees[picked].label);
       // d3.select("#winner h3").text(
-      //   "Prize: " + testData.prizes[prizeIndex - 1].label + "!"
+        // "Prize: $50!"
       // );
 
       // d3.select("#prev").append("div");
